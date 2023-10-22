@@ -24,21 +24,21 @@
     <!-- removed past/present/future from row time-block class -->
     <div id="hour-9" class="row time-block">
       <div class="col-2 col-md-1 hour text-center py-3">9AM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <textarea class="col-8 col-md-10 userInput" rows="3"> </textarea>
       <button class="btn saveBtn col-2 col-md-1" aria-label="save">
         <i class="fas fa-save" aria-hidden="true"></i>
       </button>
     </div>
     <div id="hour-10" class="row time-block">
       <div class="col-2 col-md-1 hour text-center py-3">10AM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <textarea class="col-8 col-md-10 userInput" rows="3"> </textarea>
       <button class="btn saveBtn col-2 col-md-1" aria-label="save">
         <i class="fas fa-save" aria-hidden="true"></i>
       </button>
     </div>
     <div id="hour-11" class="row time-block">
       <div class="col-2 col-md-1 hour text-center py-3">11AM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <textarea class="col-8 col-md-10 userInput" rows="3"> </textarea>
       <button class="btn saveBtn col-2 col-md-1" aria-label="save">
         <i class="fas fa-save" aria-hidden="true"></i>
       </button>
@@ -46,42 +46,42 @@
     <!-- added time blocks for the rest of the "work day" -->
     <div id="hour-12" class="row time-block">
       <div class="col-2 col-md-1 hour text-center py-3">12PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <textarea class="col-8 col-md-10 userInput" rows="3"> </textarea>
       <button class="btn saveBtn col-2 col-md-1" aria-label="save">
         <i class="fas fa-save" aria-hidden="true"></i>
       </button>
     </div>
     <div id="hour-13" class="row time-block">
       <div class="col-2 col-md-1 hour text-center py-3">1PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <textarea class="col-8 col-md-10 userInput" rows="3"> </textarea>
       <button class="btn saveBtn col-2 col-md-1" aria-label="save">
         <i class="fas fa-save" aria-hidden="true"></i>
       </button>
     </div>
     <div id="hour-14" class="row time-block">
       <div class="col-2 col-md-1 hour text-center py-3">2PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <textarea class="col-8 col-md-10 userInput" rows="3"> </textarea>
       <button class="btn saveBtn col-2 col-md-1" aria-label="save">
         <i class="fas fa-save" aria-hidden="true"></i>
       </button>
     </div>
     <div id="hour-15" class="row time-block">
       <div class="col-2 col-md-1 hour text-center py-3">3PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <textarea class="col-8 col-md-10 userInput" rows="3"> </textarea>
       <button class="btn saveBtn col-2 col-md-1" aria-label="save">
         <i class="fas fa-save" aria-hidden="true"></i>
       </button>
     </div>
     <div id="hour-16" class="row time-block">
       <div class="col-2 col-md-1 hour text-center py-3">4PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <textarea class="col-8 col-md-10 userInput" rows="3"> </textarea>
       <button class="btn saveBtn col-2 col-md-1" aria-label="save">
         <i class="fas fa-save" aria-hidden="true"></i>
       </button>
     </div>
     <div id="hour-17" class="row time-block">
       <div class="col-2 col-md-1 hour text-center py-3">5PM</div>
-      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <textarea class="col-8 col-md-10 userInput" rows="3"> </textarea>
       <button class="btn saveBtn col-2 col-md-1" aria-label="save">
         <i class="fas fa-save" aria-hidden="true"></i>
       </button>
@@ -109,6 +109,7 @@
             dateEl.text(currentDate);
             timeEl.text(currentTime);
         }
+        // displays the live time and date at 1000 milliseconds (1 second)
         setInterval(displayTimeAndDate, 1000);
     });
 
@@ -116,31 +117,39 @@
         // Calculates the current hour using Day.js 
         var currentHour = dayjs().hour();
 
-        // Loop through time blocks and apply classes based on the current hour
-        // .each is for the collectio of elements
+        // Loops through time blocks and apply classes based on the current hour
+        // .each is for the collection of time blocks
         $(".time-block").each(function () {
+          // the time block will change attributes (removing/adding classes)
             var timeBlockId = $(this).attr("id");
+            // parseInt function changes the string into a number
+            //split method that splits the string at the dash ("-") This will show an array of substrings like ["hour", "9"]
             var timeBlockHour = parseInt(timeBlockId.split("-")[1]);
-
+            // if the time block is from the previous hour
             if (timeBlockHour < currentHour) {
+              //"this" represent the .each function
+              // removes classes from the current element - removes "present" and "future" classes from the time block and adds it to the past
                 $(this).removeClass("present future").addClass("past");
+                // if the time block is within the current hour
             } else if (timeBlockHour === currentHour) {
+              // removes "past" and "future" classes from the time block and adds it to the present
                 $(this).removeClass("past future").addClass("present");
             } else {
+              // if the time block is an hour yet to come
+              // removes "past" and "present" classes from the time block and adds it to the future
                 $(this).removeClass("past present").addClass("future");
             }
         });
     }
 
-    // Call the function on page load
+    // Calls the function on page load
     updateClasses();
 
-    // Call the function at regular intervals (e.g., every minute)
+    // Calls the function at every minute
     setInterval(updateClasses, 60000); // 60000 milliseconds = 1 minute
 </script>
   <script integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous">
   </script>
   <script src="./assets/script.js"></script>
 </body>
-
 </html>
