@@ -21,91 +21,126 @@
     <p id="time"></p>
   </header>
   <div class="container-lg px-5">
-    <!-- Use class for "past", "present", and "future" to apply styles to the
-        time-block divs accordingly. The javascript will need to do this by
-        adding/removing these classes on each div by comparing the hour in the
-        id to the current hour. The html provided below is meant to be an example
-        demonstrating how the css provided can be leveraged to create the
-        desired layout and colors. The html below should be removed or updated
-        in the finished product. Remember to delete this comment once the
-        code is implemented.
-        -->
-
-    <!-- Example of a past time block. The "past" class adds a gray background color. -->
-    <div id="hour-9" class="row time-block past">
+    <!-- removed past/present/future from row time-block class -->
+    <div id="hour-9" class="row time-block">
       <div class="col-2 col-md-1 hour text-center py-3">9AM</div>
       <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
       <button class="btn saveBtn col-2 col-md-1" aria-label="save">
         <i class="fas fa-save" aria-hidden="true"></i>
       </button>
     </div>
-
-    <!-- Example of a a present time block. The "present" class adds a red background color. -->
-    <div id="hour-10" class="row time-block present">
+    <div id="hour-10" class="row time-block">
       <div class="col-2 col-md-1 hour text-center py-3">10AM</div>
       <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
       <button class="btn saveBtn col-2 col-md-1" aria-label="save">
         <i class="fas fa-save" aria-hidden="true"></i>
       </button>
     </div>
-
-    <!-- Example of a future time block. The "future" class adds a green background color. -->
-    <div id="hour-11" class="row time-block future">
+    <div id="hour-11" class="row time-block">
       <div class="col-2 col-md-1 hour text-center py-3">11AM</div>
       <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
       <button class="btn saveBtn col-2 col-md-1" aria-label="save">
         <i class="fas fa-save" aria-hidden="true"></i>
       </button>
     </div>
-    <!-- the source code is from the jQuery library to simplify the event handling -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script>
-      // This is a jQuery function that is used so that the code inside the function is run at the time it is called, after it's been parsed.
-      $(document).ready(function () {
-        // these select the elements and adds a CSS class
-        $('#hour-9').addClass('past');
-        $('#hour-10').addClass('present');
-        $('#hour-11').addClass('future');
-      });
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"></script>
-    <script>
-      $(document).ready(function () {
+    <!-- added time blocks for the rest of the "work day" -->
+    <div id="hour-12" class="row time-block">
+      <div class="col-2 col-md-1 hour text-center py-3">12PM</div>
+      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
+        <i class="fas fa-save" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div id="hour-13" class="row time-block">
+      <div class="col-2 col-md-1 hour text-center py-3">1PM</div>
+      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
+        <i class="fas fa-save" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div id="hour-14" class="row time-block">
+      <div class="col-2 col-md-1 hour text-center py-3">2PM</div>
+      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
+        <i class="fas fa-save" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div id="hour-15" class="row time-block">
+      <div class="col-2 col-md-1 hour text-center py-3">3PM</div>
+      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
+        <i class="fas fa-save" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div id="hour-16" class="row time-block">
+      <div class="col-2 col-md-1 hour text-center py-3">4PM</div>
+      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
+        <i class="fas fa-save" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div id="hour-17" class="row time-block">
+      <div class="col-2 col-md-1 hour text-center py-3">5PM</div>
+      <textarea class="col-8 col-md-10 description" rows="3"> </textarea>
+      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
+        <i class="fas fa-save" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <!-- the source code is from the jQuery library to simplify the event handling -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"></script>
+  <script>
+    // $(document) is a jQuery selector that selects the HTML document. It represents the entire HTML page.
+    // .ready(...) is a jQuery method that attaches a function to be executed when the document is fully loaded. (w3 Schools)
+    $(document).ready(function () {
         // Gets the current hour in 24-hour format using Day.js;
         var currentDate = dayjs();
-        var formattedDate = currentDate.format("dddd,MMMM,YYYY h:mm:ss a");
+        var formattedDate = currentDate.format("dddd, MMMM D, YYYY h:mm:ss A");
         console.log(formattedDate);
-        // Loops through all time blocks to apply the class
-        $(".time-block").each(function () {
-          var timeBlockId = $(this).attr("id");
-          // this pulls the hour from the id
-          var timeBlockHour = parseInt(timeBlockId.split("-")[1]);
-          // this compares the current hour to the time block's hour
-          if (timeBlockHour < currentDate) {
-            $(this).addClass("past");
-          } else if (timeBlockHour === currentDate) {
-            $(this).addClass("present");
-          } else {
-            $(this).addClass("future");
-          }
-        });
+
         function displayTimeAndDate() {
-          // this pulls the ids in order to display on the webpage
-          var dateEl = $("#date");
-          var timeEl = $("#time");
-          // links to local timezone
-          var currentDate = dayjs().format("dddd, MMMM D, YYYY");
-          var currentTime = dayjs().format("h:mm:ss A");
-          // creates text to display on the webpage
-          dateEl.text(currentDate);
-          timeEl.text(currentTime);
+          // pulls date and time from p tags in HTML
+            var dateEl = $("#date"); 
+            var timeEl = $("#time"); 
+            var currentDate = dayjs().format("dddd, MMMM D, YYYY");
+            var currentTime = dayjs().format("h:mm:ss A");
+
+            dateEl.text(currentDate);
+            timeEl.text(currentTime);
         }
         setInterval(displayTimeAndDate, 1000);
-      });
-    </script>
-    <script integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous">
-    </script>
-    <script src="./assets/script.js"></script>
+    });
+
+    function updateClasses() {
+        // Calculates the current hour using Day.js 
+        var currentHour = dayjs().hour();
+
+        // Loop through time blocks and apply classes based on the current hour
+        // .each is for the collectio of elements
+        $(".time-block").each(function () {
+            var timeBlockId = $(this).attr("id");
+            var timeBlockHour = parseInt(timeBlockId.split("-")[1]);
+
+            if (timeBlockHour < currentHour) {
+                $(this).removeClass("present future").addClass("past");
+            } else if (timeBlockHour === currentHour) {
+                $(this).removeClass("past future").addClass("present");
+            } else {
+                $(this).removeClass("past present").addClass("future");
+            }
+        });
+    }
+
+    // Call the function on page load
+    updateClasses();
+
+    // Call the function at regular intervals (e.g., every minute)
+    setInterval(updateClasses, 60000); // 60000 milliseconds = 1 minute
+</script>
+  <script integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous">
+  </script>
+  <script src="./assets/script.js"></script>
 </body>
 
 </html>
