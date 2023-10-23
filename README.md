@@ -18,3 +18,4 @@ T. Celli (personal communication - Slack, October 22, 2023)
 
 ## Deployment Link
 
+https://annat7459.github.io/5-work-day-scheduler/
