@@ -11,7 +11,7 @@ $(function () {
       // Saves the userInput in local storage with the time-block id as the key
       localStorage.setItem(timeBlockId, userInput);
     });
-    //this retrieves the stored values from local storage when the page refreshes
+    //this function retrieves the stored values from local storage when the page refreshes
     $(".time-block").each(function () {
       var timeBlockId = $(this).attr("id");
       var storeduserInput = localStorage.getItem(timeBlockId);
